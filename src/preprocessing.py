@@ -99,11 +99,14 @@ def preprocess_data(df):
     print(f"Test set: X_test {X_test.shape}, y_test {y_test.shape}")
 
     # Save processed data
-    os.makedirs('../data/processed', exist_ok=True)
-    np.save('../data/processed/X_train.npy', X_train.values)
-    np.save('../data/processed/X_test.npy', X_test.values)
-    np.save('../data/processed/y_train.npy', y_train)
-    np.save('../data/processed/y_test.npy', y_test)
+    script_dir = os.path.dirname(__file__)
+    processed_dir = os.path.join(script_dir, '..', 'data', 'processed')
+    os.makedirs(processed_dir, exist_ok=True)
+    print(f"Saving to: {os.path.abspath(processed_dir)}")
+    np.save(os.path.join(processed_dir, 'X_train.npy'), X_train.values)
+    np.save(os.path.join(processed_dir, 'X_test.npy'), X_test.values)
+    np.save(os.path.join(processed_dir, 'y_train.npy'), y_train)
+    np.save(os.path.join(processed_dir, 'y_test.npy'), y_test)
 
     return X_train, X_test, y_train, y_test, label_encoder
 
